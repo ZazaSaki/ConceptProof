@@ -187,9 +187,92 @@ double Evaluator::has_ressources(Resource_Map& list){
     };
 
 //------------------------------------History------------------------------------
+#include <cstdlib>
+
+    //history_criteria_calculator_test
+    double Evaluator::history_criteria_calculator_test(){
+        return history_criteria_calculator();
+    };
+
+    //generate  entropy
+    double* Evaluator::generate_entropy(int size, int entropy, double resolution){
+        // double resolution = 0.0000001;
+        // int entropy = 100000;
+        // int size = 4;
+        
+        double deltas [size];
+        double last = 1;
+
+
+        //iterate the deltas
+        for (int i = 0; i < (size-1); i++)
+        {
+            deltas[i] = ((rand() % entropy) * resolution) - resolution*entropy/2 + 1/(double)size;
+            last -= deltas[i];
+
+            /* Verbose : Evaluator::history_criteria_calculator_test
+            cout << "delta " << i << " : " << deltas[i] << endl;
+            //*/
+
+        }
+        deltas[size-1] = last;
+        
+        /* Verbose : Evaluator::history_criteria_calculator_test
+        
+        cout << "delta " << size-1 << " : " << last << endl;
+
+        //print sumatory of deltas
+        double sum = 0;
+        for (int i = 0; i < size; i++)
+        {
+            sum += deltas[i];
+        }
+        cout << "sum : " << sum << endl;
+
+        //print the average
+        double avg = sum/size;
+        cout << "avg : " << avg << endl;
+
+        //print the variance
+        double variance = 0;
+        for (int i = 0; i < size; i++)
+        {
+            variance += pow(deltas[i]-avg,2);
+        }
+
+        variance = variance/size;
+        cout << "variance : " << variance << endl;
+
+
+        //print the standard deviation
+        double std_deviation = sqrt(variance);
+        cout << "std_deviation : " << std_deviation << endl;
+
+        //print the entropy
+        double i_entropy = 0;
+        for (int i = 0; i < size; i++)
+        {
+            i_entropy += deltas[i] * log2(deltas[i]);
+        }
+        cout << "entropy : " << i_entropy << endl;
+
+        // print separator
+        cout << "----------------------" << endl;
+
+        //*/
+        return deltas;
+    };
 
     //history_criteria_calculator
     double Evaluator::history_criteria_calculator(){
+            double resolution = 0.0000001;
+            int entropy = 100000;
+            int size = 4;
+            
+            double * deltas = generate_entropy(size, entropy, resolution);
+
+
+            
             //A1 = requirements req/total req * 100
             //A2 = non used reservations %
             //A3 = avg duration last admition/avg general allowed admition duration 

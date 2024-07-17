@@ -31,6 +31,8 @@ public:
     //tests
     double procedural_weighted_average_test(std::vector<double>, int=3, int=2);
     double proximity_criteria_calculator_test(Network_Map&);
+    double history_criteria_calculator_test();
+
 
 private:
     // Add any private members or helper methods here
@@ -47,12 +49,16 @@ private:
     double packetLoss(double,double, int);
     double fii(double, double, int);
     double proximity_criteria_calculator(Network_Map&);
-    double history_criteria_calculator();
+    
     double proximity_bid();
     void proximity_data_manager();
 
     //fairness
     int fairness_bid(int);
+
+    //history
+    double history_criteria_calculator();
+    double * generate_entropy(int = 4, int = 10000, double = 0.0000001);
 
 };
 

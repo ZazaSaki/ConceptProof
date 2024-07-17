@@ -124,8 +124,8 @@ int main(int argc, char const *argv[])
         ns[PACKET_LOSS_MODE] = rand() % 3 + 1;
 
         
-        double CCC = ev.bid_value(ress, ns, 3) ;
-        //cout << "bid : " << endl << ev.proximity_criteria_calculator_test(ns) << endl << endl;
+        double CCC = ev.bid_value(ress, ns, 3);
+        //cout << "bid : " << endl << ev.bid_value(ress,ns,3) << endl << endl;
 
         if (CCC>1)
         {
@@ -148,6 +148,14 @@ int main(int argc, char const *argv[])
 
     cout << "passed" << endl << endl;
 
+
+    // history_criteria_calculator_test
+    // cout << "History criteria calculator test : " << ev.history_criteria_calculator_test() << endl << endl;
+    for (int i = 0; i < 10; i++)
+    {
+        ev.history_criteria_calculator_test();          
+    }
+    
     // // print ns values
     // for (auto i = ns.begin(); i != ns.end(); i++)
     // {
